@@ -1,39 +1,43 @@
 using LinearAlgebra
 
-function newton_rapson(f,x0,Na)#::Array{Float64}
-	# f = função, x0 = chute, N-dim
-	J = ones(Na,Na) # construindo a Jacobiana
-	F = ones(Na)::Array{Float64}
-	x1 = ones(Na)::Array{Float64}
-	dFp = Array{Float64}(undef,Na, Na)# vai guardar as derivadas de F
-	#com relação a xi
-	dFn = Array{Float64}(undef,Na, Na)
-	dx = 0.01
-	Id = 1*Matrix(I,Na,Na)#::Array{Float64}
+# Newton-Raphson method with approximated Jacobian Matrix 
+# using finite difference method for derivatives.
+# f = function, x0 = initial guess, Na = Number of dimensions (of f and x)
+# tol = tolerance (norm(F) < tol ), dx = difference
+
+function newton_rapson(f,x0,Na, tol,dx)
+	
+	J = ones(Na,Na) 			# Jacobian Matrix 
+	F = ones(Na)::Array{Float64} 		# Vector function 
+	x1 = ones(Na)::Array{Float64} 		# New function 
+	dFp = Array{Float64}(undef,Na, Na) 	# F(x0 + dx) Forward 
+	dFn = Array{Float64}(undef,Na, Na)	# F(x0 - dx) Backward
+	Id = 1*Matrix(I,Na,Na)
 	it = 0 ::Int64
-	println("Teste")
-	#println([x1,it,norm(F)])
+	
 	for it in 0:1000
-		F = f(x0) # F no passo atual
-		println(x0 + dx*Id[:,1])
+	
+		F = f(x0) 		# evaluate and store F(x0) 
+		
 		for i in 1:Na
-			#println(x0 + dx*Id[:,i])
-			dFp[i,:] = f(x0 + dx*Id[:,i])
-			dFn[i,:] = f(x0 - dx*Id[:,i])
-			#println(dF)
+			
+			dFp[i,:] = f(x0 + dx*Id[:,i]) # evaluate and store F(x0 + dx)
+			dFn[i,:] = f(x0 - dx*Id[:,i]) # evaluate and store F(x0 - dx)
+			
 			for j in 1:Na
-				J[i,j] = (dFp[i,j]-dFn[i,j])/(2*dx)
+				J[i,j] = (dFp[i,j]-dFn[i,j])/(2*dx) # Building the Jacobian Matrix
 			end
 		end
-		println(J)
-		x1 = x0 - inv(J)*F
 		
-		#println([x1,it,norm(F)])
-		if norm(F) < 1.0e-10
-			return [x1,it,norm(F)]
+		x1 = x0 - inv(J)*F 		      # Evaluating the x1 from x0
+		
+		if norm(F) < tol
+			return [x1,it,norm(F),true]
+				# [ answer , number_iterations , norm_of_F, convergence ]
 		else
 			x0 = x1
 		end
 	end
-	return [!true,it,norm(F)]
+	return [x1,it,norm(F),false]
+		# [ answer , number_iterations , norm_of_F, convergence ]
 end
