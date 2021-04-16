@@ -15,7 +15,9 @@ If you found it usefull, please cite:
 ## Implemented Methods so far:
 
 ### Newton-Raphson
-   Simple solver of non-linear equations in the form of $F(\vec{x}) = 0$ using finite difference approximation for derivative. 
+   Simple solver of non-linear equations in the form of 
+   <img src="https://render.githubusercontent.com/render/math?math=\Huge \vec{F}(\vec{x})">
+   using finite difference approximation for derivative. 
 
 
 
