@@ -3,7 +3,7 @@ Numerical Methods implemented in Julia lenguage.
 
 If you found it usefull, please cite: 
 
-'''LaTeX
+```LaTeX
 
 @Misc{,
   author = 	 {Arhur E. B. Pasqualotto},
@@ -13,7 +13,7 @@ If you found it usefull, please cite:
 }
 
 
-'''
+```
 
 
 ## Implemented Methods so far:
