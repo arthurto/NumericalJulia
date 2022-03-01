@@ -4,7 +4,7 @@ Numerical Methods implemented in Julia lenguage.
 If you found it usefull, please cite: 
 
 ```LaTeX
-@Misc{,
+@Misc{NumJulia_ArthurP,
   author = 	 {Arhur E. B. Pasqualotto},
   title = 	 {NumericalJulia: Numerical Methods implemented in Julia lenguage.},
   year = 	 {2021},
