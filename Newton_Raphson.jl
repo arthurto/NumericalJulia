@@ -5,8 +5,9 @@ using LinearAlgebra
 # f = function, x0 = initial guess, Na = Number of dimensions (of f and x)
 # tol = tolerance (norm(F) < tol ), dx = difference
 
-function newton_rapson(f,x0,Na, tol,dx)
+function newton_rapson(f,x0::Array{Float64} , tol::Float64,dx::Float64)
 	
+	Na = length(x0)
 	J = ones(Na,Na) 			        # Jacobian Matrix 
 	F = ones(Na)::Array{Float64} 		# Vector function 
 	x1 = ones(Na)::Array{Float64} 		# New function 
