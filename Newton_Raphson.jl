@@ -7,7 +7,7 @@ using LinearAlgebra
 
 function newton_rapson(f,x0,Na, tol,dx)
 	
-	J = ones(Na,Na) 			# Jacobian Matrix 
+	J = ones(Na,Na) 			        # Jacobian Matrix 
 	F = ones(Na)::Array{Float64} 		# Vector function 
 	x1 = ones(Na)::Array{Float64} 		# New function 
 	dFp = Array{Float64}(undef,Na, Na) 	# F(x0 + dx) Forward 
